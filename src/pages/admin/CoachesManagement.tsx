@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Plus, Search, Pencil, Trash, Briefcase, Calendar, Award } from 'lucide-react';
@@ -201,7 +200,7 @@ const CoachesManagement = () => {
                       variant="ghost" 
                       size="sm"
                       onClick={() => handleEdit(coach)}
-                      className="text-blue-600 hover:text-blue-900"
+                      className="text-emerald-600 hover:text-emerald-900"
                     >
                       <Pencil className="h-4 w-4" />
                     </Button>

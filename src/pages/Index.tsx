@@ -1,176 +1,100 @@
-import React, { useState, useEffect } from 'react';
-import Hero from '@/components/Hero';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import TournamentCard from '@/components/TournamentCard';
-import LazyTournamentTable from '@/components/LazyTournamentTable';
-import { ArrowRight, Trophy, Users, Star } from 'lucide-react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { getTournamentsList, Tournament } from '@/utils/api';
+import { Trophy, Calendar, Newspaper, ArrowRight, Star } from 'lucide-react';
+// Импортируем фотографию команды
+import teamPhoto from '@assets/images/team.jpg';
 
 const Index = () => {
-  const [tournaments, setTournaments] = useState<Tournament[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [featuredTournament, setFeaturedTournament] = useState<Tournament | null>(null);
-  
-  useEffect(() => {
-    const fetchTournaments = async () => {
-      try {
-        const data = await getTournamentsList();
-        setTournaments(data);
-        
-        // Set featured tournament (first featured one or first in the list)
-        const featured = data.find((t: any) => t.featured) || data[0];
-        setFeaturedTournament(featured);
-        
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching tournaments:", error);
-        setLoading(false);
-      }
-    };
-    
-    fetchTournaments();
-  }, []);
-  
   return (
-    <div className="min-h-screen flex flex-col bg-white">
-      <Navbar />
-      
-      <main className="flex-grow page-transition">
-        <Hero />
-        
-        {/* Featured Tournament Table Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">ТЕКУЩЕЕ ПОЛОЖЕНИЕ В ТАБЛИЦЕ</h2>
-              <div className="w-24 h-1 bg-fc-green mx-auto mb-6"></div>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-                Актуальные данные о положении команд в турнирной таблице
+    <div className="min-h-screen bg-gradient-to-br from-[#1a472a] via-[#2a7a2a] to-[#1a5f1a] py-12 relative overflow-hidden">
+      {/* Декоративные элементы */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 left-0 w-full h-full bg-[#ffd700] opacity-[0.02] bg-[radial-gradient(circle,_transparent_20%,_#ffd700_20%,_#ffd700_80%,_transparent_80%,_transparent),radial-gradient(circle,_transparent_20%,_#ffd700_20%,_#ffd700_80%,_transparent_80%,_transparent)_30px_30px] bg-[length:60px_60px]"></div>
+        <div className="absolute top-20 left-10 w-96 h-96 bg-[#ffd700]/10 rounded-full blur-[120px]"></div>
+        <div className="absolute bottom-20 right-10 w-[500px] h-[500px] bg-[#8b0000]/10 rounded-full blur-[120px]"></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        {/* Приветственная секция */}
+        <div className="text-center mb-20">
+          <div className="inline-flex items-center justify-center px-4 py-1.5 mb-6 rounded-full border border-[#ffd700]/20 bg-[#ffd700]/5 backdrop-blur-sm">
+            <Star className="w-4 h-4 text-[#ffd700] mr-2" />
+            <span className="text-sm font-medium text-[#ffd700]">Футбольный клуб Гудаута</span>
+          </div>
+          <h1 className="text-6xl font-bold text-[#ffd700] mb-6 drop-shadow-lg tracking-tight">
+            Добро пожаловать на<br />официальный сайт
+          </h1>
+          <p className="text-xl text-[#ffd700]/90 max-w-2xl mx-auto leading-relaxed">
+            Следите за новостями, результатами и достижениями нашей команды
+          </p>
+        </div>
+
+        {/* Фотография команды */}
+        <div className="mb-20">
+          <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-[#ffd700]/20 backdrop-blur-sm transform hover:scale-[1.01] transition-all duration-500">
+            <img
+              src={teamPhoto}
+              alt="Команда ФК Гудаута"
+              className="w-full h-[600px] object-cover transform hover:scale-105 transition-transform duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#1a472a] via-[#1a472a]/50 to-transparent"></div>
+            <div className="absolute bottom-0 left-0 right-0 p-10 text-[#ffd700]">
+              <h2 className="text-3xl font-bold mb-3">Наша команда</h2>
+              <p className="text-[#ffd700]/90 text-lg max-w-2xl">
+                Сила в единстве и стремлении к победе
               </p>
-              
-              {featuredTournament && !loading && (
-                <div className="inline-flex items-center text-fc-green font-medium">
-                  <Trophy size={18} className="mr-2" />
-                  {featuredTournament.title}
-                </div>
-              )}
-            </div>
-            
-            <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-              {featuredTournament && !loading ? (
-                <LazyTournamentTable 
-                  tournamentId={featuredTournament.id} 
-                  source={featuredTournament.source} 
-                />
-              ) : (
-                <div className="min-h-[400px] flex items-center justify-center">
-                  <div className="h-10 w-10 animate-spin rounded-full border-4 border-fc-green border-t-transparent"></div>
-                </div>
-              )}
-            </div>
-            
-            <div className="mt-10 text-center">
-              <Link 
-                to="/tournaments" 
-                className="btn-primary bg-fc-green text-white px-6 py-3 inline-flex items-center shadow-md hover:shadow-lg transition-all duration-300"
-              >
-                Все турнирные таблицы
-                <ArrowRight size={18} className="ml-2" />
-              </Link>
             </div>
           </div>
-        </section>
-        
-        {/* Club Values Section */}
-        <section className="bg-blue-900 text-white py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-fc-yellow mb-6 drop-shadow-md">ФУТБОЛ — ЭТО БОЛЬШЕ ЧЕМ ИГРА</h2>
-              <div className="w-24 h-1 bg-fc-yellow mx-auto mb-6"></div>
-              <p className="text-xl text-white/90 max-w-3xl mx-auto">Наш клуб воспитывает характер, дисциплину и командный дух</p>
+        </div>
+
+        {/* Быстрые ссылки */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          <Link
+            to="/tournaments"
+            className="group bg-[#1a472a]/40 backdrop-blur-sm rounded-2xl p-8 border border-[#ffd700]/20 hover:border-[#ffd700]/40 transition-all duration-500 hover:shadow-lg hover:shadow-[#ffd700]/5 hover:-translate-y-1"
+          >
+            <div className="bg-[#ffd700]/10 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+              <Trophy className="w-8 h-8 text-[#ffd700]" />
             </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="bg-blue-800/50 p-8 rounded-lg border-l-4 border-fc-yellow shadow-lg hover:shadow-xl transition duration-300">
-                <div className="flex items-start mb-6">
-                  <Trophy className="text-fc-yellow mr-4 h-10 w-10" />
-                  <h3 className="text-2xl font-bold">Традиции</h3>
-                </div>
-                <p className="text-white/80 text-lg">
-                  Богатая история и традиции нашего клуба — основа нашего развития и достижений на футбольном поле.
-                </p>
-              </div>
-              
-              <div className="bg-blue-800/50 p-8 rounded-lg border-l-4 border-fc-yellow shadow-lg hover:shadow-xl transition duration-300">
-                <div className="flex items-start mb-6">
-                  <Users className="text-fc-yellow mr-4 h-10 w-10" />
-                  <h3 className="text-2xl font-bold">Команда</h3>
-                </div>
-                <p className="text-white/80 text-lg">
-                  Наши игроки — это единая команда профессионалов, нацеленных на результат и постоянное совершенствование.
-                </p>
-              </div>
-              
-              <div className="bg-blue-800/50 p-8 rounded-lg border-l-4 border-fc-yellow shadow-lg hover:shadow-xl transition duration-300">
-                <div className="flex items-start mb-6">
-                  <Star className="text-fc-yellow mr-4 h-10 w-10" />
-                  <h3 className="text-2xl font-bold">Развитие</h3>
-                </div>
-                <p className="text-white/80 text-lg">
-                  Мы постоянно развиваемся, ставим амбициозные цели и достигаем новых высот в мире футбола.
-                </p>
-              </div>
+            <h3 className="text-2xl font-bold text-[#ffd700] mb-3">Турнирные таблицы</h3>
+            <p className="text-[#ffd700]/80 mb-6 leading-relaxed">Следите за результатами и турнирным положением команды</p>
+            <div className="flex items-center text-[#ffd700]/60 group-hover:text-[#ffd700] transition-colors">
+              <span className="font-medium">Подробнее</span>
+              <ArrowRight className="w-5 h-5 ml-2 transform group-hover:translate-x-2 transition-transform duration-500" />
             </div>
-          </div>
-        </section>
-        
-        {/* All Tournaments Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-          <div className="max-w-7xl mx-auto">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
-              <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4 border-l-4 border-fc-green pl-4">ТУРНИРЫ И СОРЕВНОВАНИЯ</h2>
-                <p className="text-gray-600 max-w-2xl">
-                  Следите за актуальными турнирными таблицами и результатами всех соревнований с участием нашего клуба
-                </p>
-              </div>
-              
-              <Link to="/tournaments" className="mt-4 md:mt-0 btn-secondary border-2 shadow-md hover:shadow-lg transition-all duration-300">
-                Все соревнования
-                <ArrowRight size={18} className="ml-2" />
-              </Link>
+          </Link>
+
+          <Link
+            to="/news"
+            className="group bg-[#1a472a]/40 backdrop-blur-sm rounded-2xl p-8 border border-[#ffd700]/20 hover:border-[#ffd700]/40 transition-all duration-500 hover:shadow-lg hover:shadow-[#ffd700]/5 hover:-translate-y-1"
+          >
+            <div className="bg-[#ffd700]/10 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+              <Newspaper className="w-8 h-8 text-[#ffd700]" />
             </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {loading ? (
-                Array(3).fill(0).map((_, index) => (
-                  <div key={index} className="h-72 rounded-xl bg-gray-100 animate-pulse shadow"></div>
-                ))
-              ) : (
-                tournaments
-                  .filter((tournament: any) => tournament.featured || tournament.type === 'регулярный')
-                  .slice(0, 3)
-                  .map((tournament: any) => (
-                    <TournamentCard
-                      key={tournament.id}
-                      id={tournament.id}
-                      title={tournament.title}
-                      type={tournament.type}
-                      season={tournament.season}
-                      teams={tournament.teams}
-                      source={tournament.source}
-                      featured={tournament.featured}
-                    />
-                  ))
-              )}
+            <h3 className="text-2xl font-bold text-[#ffd700] mb-3">Новости</h3>
+            <p className="text-[#ffd700]/80 mb-6 leading-relaxed">Будьте в курсе последних событий и новостей клуба</p>
+            <div className="flex items-center text-[#ffd700]/60 group-hover:text-[#ffd700] transition-colors">
+              <span className="font-medium">Подробнее</span>
+              <ArrowRight className="w-5 h-5 ml-2 transform group-hover:translate-x-2 transition-transform duration-500" />
             </div>
-          </div>
-        </section>
-      </main>
-      
-      <Footer />
+          </Link>
+
+          <Link
+            to="/team"
+            className="group bg-[#1a472a]/40 backdrop-blur-sm rounded-2xl p-8 border border-[#ffd700]/20 hover:border-[#ffd700]/40 transition-all duration-500 hover:shadow-lg hover:shadow-[#ffd700]/5 hover:-translate-y-1"
+          >
+            <div className="bg-[#ffd700]/10 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+              <Calendar className="w-8 h-8 text-[#ffd700]" />
+            </div>
+            <h3 className="text-2xl font-bold text-[#ffd700] mb-3">Команда</h3>
+            <p className="text-[#ffd700]/80 mb-6 leading-relaxed">Познакомьтесь с игроками и тренерским составом</p>
+            <div className="flex items-center text-[#ffd700]/60 group-hover:text-[#ffd700] transition-colors">
+              <span className="font-medium">Подробнее</span>
+              <ArrowRight className="w-5 h-5 ml-2 transform group-hover:translate-x-2 transition-transform duration-500" />
+            </div>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };

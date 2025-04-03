@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { Users, Trophy, Settings, LogOut, Users2, Shield } from 'lucide-react';
@@ -87,18 +86,18 @@ const AdminDashboard = () => {
                 <li>
                   <Link
                     to="/admin/players?team=gudauta-school"
-                    className="block px-4 py-2.5 rounded-lg hover:bg-gradient-to-r hover:from-blue-500/10 hover:to-blue-400/10 text-gray-700 font-medium flex items-center transition-all"
+                    className="block px-4 py-2.5 rounded-lg hover:bg-gradient-to-r hover:from-emerald-500/10 hover:to-emerald-400/10 text-gray-700 font-medium flex items-center transition-all"
                   >
-                    <Users className="mr-3 h-5 w-5 text-blue-500" />
+                    <Users className="mr-3 h-5 w-5 text-emerald-500" />
                     Игроки школы
                   </Link>
                 </li>
                 <li>
                   <Link
                     to="/admin/coaches?team=gudauta-school"
-                    className="block px-4 py-2.5 rounded-lg hover:bg-gradient-to-r hover:from-blue-500/10 hover:to-blue-400/10 text-gray-700 font-medium flex items-center transition-all"
+                    className="block px-4 py-2.5 rounded-lg hover:bg-gradient-to-r hover:from-emerald-500/10 hover:to-emerald-400/10 text-gray-700 font-medium flex items-center transition-all"
                   >
-                    <Users2 className="mr-3 h-5 w-5 text-blue-500" />
+                    <Users2 className="mr-3 h-5 w-5 text-emerald-500" />
                     Тренеры школы
                   </Link>
                 </li>

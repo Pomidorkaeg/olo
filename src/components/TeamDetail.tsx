@@ -156,7 +156,7 @@ const TeamDetail: React.FC<TeamDetailProps> = ({ team }) => {
                     rel="noopener noreferrer"
                     className={cn(
                       "p-2 rounded-full transition-colors duration-200",
-                      "bg-gray-600 hover:bg-gray-700"
+                      "bg-blue-600 hover:bg-blue-700"
                     )}
                   >
                     <Facebook className="h-5 w-5 text-white" />
@@ -170,7 +170,7 @@ const TeamDetail: React.FC<TeamDetailProps> = ({ team }) => {
                     rel="noopener noreferrer"
                     className={cn(
                       "p-2 rounded-full transition-colors duration-200",
-                      "bg-gray-400 hover:bg-gray-500"
+                      "bg-blue-400 hover:bg-blue-500"
                     )}
                   >
                     <Twitter className="h-5 w-5 text-white" />

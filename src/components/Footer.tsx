@@ -1,108 +1,91 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Instagram, Facebook, Twitter, MapPin, Phone, Mail } from 'lucide-react';
+import { Facebook, Instagram, Twitter, Youtube } from 'lucide-react';
 
 const Footer = () => {
+  const navigation = {
+    main: [
+      { name: 'О клубе', href: '/about' },
+      { name: 'Команда', href: '/team' },
+      { name: 'Турниры', href: '/tournaments' },
+      { name: 'Матчи', href: '/matches' },
+      { name: 'Новости', href: '/news' },
+      { name: 'Медиа', href: '/media' },
+      { name: 'Контакты', href: '/contacts' },
+    ],
+    social: [
+      {
+        name: 'Facebook',
+        href: '#',
+        icon: Facebook,
+      },
+      {
+        name: 'Instagram',
+        href: '#',
+        icon: Instagram,
+      },
+      {
+        name: 'Twitter',
+        href: '#',
+        icon: Twitter,
+      },
+      {
+        name: 'YouTube',
+        href: '#',
+        icon: Youtube,
+      },
+    ],
+  };
+  
   return (
-    <footer className="bg-fc-green text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <footer className="bg-emerald-900 border-t border-emerald-800">
+      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h3 className="text-xl font-bold mb-4">ФК ГУДАУТА</h3>
-            <p className="text-white/80 mb-4">
-              Футбольный клуб с богатой историей и традициями, стремящийся к новым победам и достижениям.
+            <h3 className="text-lg font-semibold text-emerald-100 mb-4">О нас</h3>
+            <p className="text-emerald-100/80">
+              ФК ГУДАУТА - футбольный клуб с богатой историей и традициями, 
+              стремящийся к новым победам и достижениям.
             </p>
-            <div className="flex space-x-4">
-              <a href="#" className="text-white hover:text-fc-yellow transition-colors duration-300">
-                <Instagram size={20} />
-              </a>
-              <a href="#" className="text-white hover:text-fc-yellow transition-colors duration-300">
-                <Facebook size={20} />
-              </a>
-              <a href="#" className="text-white hover:text-fc-yellow transition-colors duration-300">
-                <Twitter size={20} />
-              </a>
-            </div>
           </div>
           
           <div>
-            <h3 className="text-xl font-bold mb-4">Страницы</h3>
+            <h3 className="text-lg font-semibold text-emerald-100 mb-4">Навигация</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/" className="text-white/80 hover:text-white transition-colors duration-300">Главная</Link>
+                <Link to="/" className="text-emerald-100/80 hover:text-emerald-300">
+                  Главная
+                </Link>
               </li>
               <li>
-                <Link to="/team" className="text-white/80 hover:text-white transition-colors duration-300">Команда</Link>
+                <Link to="/tournaments" className="text-emerald-100/80 hover:text-emerald-300">
+                  Турниры
+                </Link>
               </li>
               <li>
-                <Link to="/news" className="text-white/80 hover:text-white transition-colors duration-300">Новости</Link>
-              </li>
-              <li>
-                <Link to="/matches" className="text-white/80 hover:text-white transition-colors duration-300">Матчи</Link>
-              </li>
-              <li>
-                <Link to="/tournaments" className="text-white/80 hover:text-white transition-colors duration-300">Соревнования</Link>
+                <Link to="/matches" className="text-emerald-100/80 hover:text-emerald-300">
+                  Матчи
+                </Link>
               </li>
             </ul>
           </div>
           
           <div>
-            <h3 className="text-xl font-bold mb-4">Соревнования</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link to="/tournaments" className="text-white/80 hover:text-white transition-colors duration-300">3 Лига ПФЛ</Link>
-              </li>
-              <li>
-                <Link to="/tournaments" className="text-white/80 hover:text-white transition-colors duration-300">Кубок России</Link>
-              </li>
-              <li>
-                <Link to="/tournaments" className="text-white/80 hover:text-white transition-colors duration-300">Чемпионат Абхазии</Link>
-              </li>
-              <li>
-                <Link to="/tournaments" className="text-white/80 hover:text-white transition-colors duration-300">Кубок победы</Link>
-              </li>
-              <li>
-                <Link to="/tournaments" className="text-white/80 hover:text-white transition-colors duration-300">Кубок Абхазии</Link>
-              </li>
-            </ul>
-          </div>
-          
-          <div>
-            <h3 className="text-xl font-bold mb-4">Контакты</h3>
-            <ul className="space-y-4">
-              <li className="flex items-start space-x-3">
-                <MapPin size={20} className="shrink-0 mt-1" />
-                <span className="text-white/80">Гудаута, ул. Спортивная, 20</span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <Phone size={20} className="shrink-0" />
-                <span className="text-white/80">+7 (940) 123-45-67</span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <Mail size={20} className="shrink-0" />
-                <span className="text-white/80">info@fcgudauta.com</span>
-              </li>
+            <h3 className="text-lg font-semibold text-emerald-100 mb-4">Контакты</h3>
+            <ul className="space-y-2 text-emerald-100/80">
+              <li>Адрес: г. Гудаута</li>
+              <li>Телефон: +7 (XXX) XXX-XX-XX</li>
+              <li>Email: info@fcgudauta.ru</li>
             </ul>
           </div>
         </div>
         
-        <div className="border-t border-white/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-white/80">© {new Date().getFullYear()} ФК Гудаута. Все права защищены.</p>
-          <div className="mt-4 md:mt-0">
-            <ul className="flex space-x-6">
-              <li>
-                <a href="#" className="text-white/80 hover:text-white transition-colors duration-300">Политика конфиденциальности</a>
-              </li>
-              <li>
-                <a href="#" className="text-white/80 hover:text-white transition-colors duration-300">Условия использования</a>
-              </li>
-            </ul>
-          </div>
+        <div className="mt-8 pt-8 border-t border-emerald-800 text-center text-emerald-100/80">
+          © 2024 ФК ГУДАУТА. Все права защищены.
         </div>
       </div>
     </footer>
   );
 };
 
-export default Footer;
+export default Footer; 

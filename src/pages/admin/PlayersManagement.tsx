@@ -223,9 +223,8 @@ const PlayersManagement = () => {
                       {player.height} см, {player.weight} кг
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      <div className="flex items-center space-x-2">
-                        <span className="px-2 py-1 text-xs rounded bg-gray-100 text-gray-800">{player.matches} матчей</span>
-                        <span className="px-2 py-1 text-xs rounded bg-green-100 text-green-800">{player.goals} голов</span>
+                      <div className="flex items-center space-x-4">
+                        <span className="px-2 py-1 text-xs rounded bg-emerald-100 text-emerald-800">{player.matches} матчей</span>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
@@ -233,7 +232,7 @@ const PlayersManagement = () => {
                         variant="ghost" 
                         size="sm"
                         onClick={() => handleEdit(player)}
-                        className="text-gray-600 hover:text-gray-900 mr-2"
+                        className="text-emerald-600 hover:text-emerald-900 mr-2"
                       >
                         <Pencil className="h-4 w-4" />
                       </Button>

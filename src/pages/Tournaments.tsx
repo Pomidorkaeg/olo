@@ -1,172 +1,145 @@
 import React, { useState } from 'react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import TournamentTable from '@/components/TournamentTable';
-import { Search, ChevronDown, Trophy } from 'lucide-react';
-
-// Временные данные для тестирования
-const mockTournaments = [
-  {
-    id: '1',
-    title: 'Чемпионат России',
-    type: 'championship',
-    season: '2023/2024',
-    teams: 16,
-    source: 'russia',
-    featured: true
-  },
-  {
-    id: '2',
-    title: 'Кубок России',
-    type: 'cup',
-    season: '2023/2024',
-    teams: 32,
-    source: 'russia',
-    featured: false
-  }
-];
+import { Trophy, ChevronRight, ChevronLeft } from 'lucide-react';
 
 const Tournaments = () => {
-  const [selectedTournament, setSelectedTournament] = useState(null);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [filter, setFilter] = useState('all');
-  
-  const handleTournamentSelect = (tournament) => {
-    setSelectedTournament(tournament);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-  
-  const filteredTournaments = mockTournaments
-    .filter((tournament) => {
-      if (searchQuery) {
-        return tournament.title.toLowerCase().includes(searchQuery.toLowerCase());
-      }
-      return true;
-    })
-    .filter((tournament) => {
-      if (filter === 'all') return true;
-      if (filter === 'featured') return tournament.featured;
-      return tournament.type.toLowerCase().includes(filter.toLowerCase());
-    });
-  
+  const [activeTab, setActiveTab] = useState<'siberia' | 'ffnso'>('siberia');
+
+  // Данные из СФФ Сибири
+  const siberiaTournaments = [
+    {
+      id: 1,
+      name: 'Чемпионат Сибири 2024',
+      status: 'active',
+      tables: [
+        {
+          id: 1,
+          name: 'Группа А',
+          teams: [
+            { position: 1, name: 'Сибирь', games: 5, wins: 4, draws: 1, losses: 0, goalsFor: 12, goalsAgainst: 3, points: 13 },
+            { position: 2, name: 'Томь', games: 5, wins: 3, draws: 2, losses: 0, goalsFor: 10, goalsAgainst: 4, points: 11 },
+            { position: 3, name: 'Омск', games: 5, wins: 2, draws: 1, losses: 2, goalsFor: 8, goalsAgainst: 7, points: 7 },
+            { position: 4, name: 'Новосибирск', games: 5, wins: 1, draws: 1, losses: 3, goalsFor: 5, goalsAgainst: 9, points: 4 },
+            { position: 5, name: 'Красноярск', games: 5, wins: 0, draws: 0, losses: 5, goalsFor: 2, goalsAgainst: 14, points: 0 }
+          ]
+        }
+      ]
+    }
+  ];
+
+  // Данные из ФФНСО
+  const ffnsoTournaments = [
+    {
+      id: 1,
+      name: 'Чемпионат НСО 2024',
+      status: 'active',
+      tables: [
+        {
+          id: 1,
+          name: 'Высшая лига',
+          teams: [
+            { position: 1, name: 'Новосибирск', games: 6, wins: 5, draws: 1, losses: 0, goalsFor: 15, goalsAgainst: 4, points: 16 },
+            { position: 2, name: 'Бердск', games: 6, wins: 4, draws: 2, losses: 0, goalsFor: 12, goalsAgainst: 5, points: 14 },
+            { position: 3, name: 'Искитим', games: 6, wins: 3, draws: 2, losses: 1, goalsFor: 10, goalsAgainst: 6, points: 11 },
+            { position: 4, name: 'Куйбышев', games: 6, wins: 2, draws: 1, losses: 3, goalsFor: 8, goalsAgainst: 10, points: 7 },
+            { position: 5, name: 'Тогучин', games: 6, wins: 1, draws: 1, losses: 4, goalsFor: 5, goalsAgainst: 12, points: 4 }
+          ]
+        }
+      ]
+    }
+  ];
+
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
-      <Navbar />
-      
-      <main className="flex-grow pt-16">
-        {/* Header */}
-        <div className="relative bg-gradient-to-b from-gray-900 to-gray-800 text-white py-20">
-          <div 
-            className="absolute inset-0 bg-black/60"
-            style={{ 
-              backgroundImage: `url('https://images.unsplash.com/photo-1459865264687-595d652de67e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundBlendMode: 'overlay'
-            }}
-          ></div>
-          
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col items-center text-center">
-              <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/10 backdrop-blur-sm mb-8 border-2 border-white/20">
-                <Trophy className="w-10 h-10 text-yellow-400" />
-              </div>
-              
-              <h1 className="text-5xl font-bold mb-6 tracking-tight">Турниры и соревнования</h1>
-              <p className="max-w-2xl text-white/90 text-xl font-medium">
-                Следите за актуальными турнирными таблицами и результатами всех соревнований с участием нашего клуба
-              </p>
-            </div>
+    <div className="min-h-screen bg-gradient-to-b from-[#2a7a2a] to-[#1a5f1a] py-12 relative overflow-hidden">
+      {/* Декоративные элементы */}
+      <div className="absolute inset-0">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-[#ffd700]/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#8b0000]/5 rounded-full blur-3xl"></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        {/* Заголовок */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-[#ffd700] mb-4 drop-shadow-lg">Турнирные таблицы</h1>
+          <div className="w-24 h-1 bg-[#ffd700] mx-auto mb-6"></div>
+          <p className="text-xl text-[#ffd700]/90">
+            Результаты и статистика турниров
+          </p>
+        </div>
+
+        {/* Переключатель турниров */}
+        <div className="flex justify-center mb-8">
+          <div className="bg-[#2a7a2a]/40 backdrop-blur-sm rounded-lg p-1 border border-[#ffd700]/20 shadow-lg">
+            <button
+              onClick={() => setActiveTab('siberia')}
+              className={`px-8 py-3 rounded-md transition-all duration-300 ${
+                activeTab === 'siberia'
+                  ? 'bg-[#8b0000] text-[#ffd700] shadow-md'
+                  : 'text-[#ffd700]/80 hover:text-[#ffd700] hover:bg-[#2a7a2a]/60'
+              }`}
+            >
+              СФФ Сибирь
+            </button>
+            <button
+              onClick={() => setActiveTab('ffnso')}
+              className={`px-8 py-3 rounded-md transition-all duration-300 ${
+                activeTab === 'ffnso'
+                  ? 'bg-[#8b0000] text-[#ffd700] shadow-md'
+                  : 'text-[#ffd700]/80 hover:text-[#ffd700] hover:bg-[#2a7a2a]/60'
+              }`}
+            >
+              ФФНСО
+            </button>
           </div>
         </div>
-        
-        {/* Tournament List */}
-        <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between gap-6 mb-12">
-            <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-2">Все турниры</h2>
-              <p className="text-gray-600">Выберите турнир для просмотра подробной информации</p>
-            </div>
-            
-            <div className="flex flex-col sm:flex-row gap-4">
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Поиск турниров..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full sm:w-64 px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent bg-white shadow-sm"
-                />
-                <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+
+        {/* Турнирные таблицы */}
+        <div className="space-y-8">
+          {(activeTab === 'siberia' ? siberiaTournaments : ffnsoTournaments).map((tournament) => (
+            <div key={tournament.id} className="bg-[#2a7a2a]/40 backdrop-blur-sm rounded-2xl p-8 border border-[#ffd700]/20">
+              <div className="flex items-center mb-6">
+                <Trophy className="w-6 h-6 text-[#ffd700] mr-3" />
+                <h2 className="text-2xl font-bold text-[#ffd700]">{tournament.name}</h2>
               </div>
-              
-              <div className="relative">
-                <select
-                  value={filter}
-                  onChange={(e) => setFilter(e.target.value)}
-                  className="w-full sm:w-48 px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent appearance-none bg-white shadow-sm"
-                >
-                  <option value="all">Все турниры</option>
-                  <option value="featured">Избранные</option>
-                  <option value="cup">Кубки</option>
-                  <option value="championship">Чемпионаты</option>
-                </select>
-                <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5 pointer-events-none" />
-              </div>
-            </div>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredTournaments.map((tournament) => (
-              <div 
-                key={tournament.id}
-                onClick={() => handleTournamentSelect(tournament)}
-                className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 cursor-pointer hover:shadow-lg transition-all duration-200 hover:border-gray-900/30"
-              >
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-xl font-bold text-gray-900">{tournament.title}</h3>
-                  {tournament.featured && (
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-800">
-                      Избранное
-                    </span>
-                  )}
+
+              {tournament.tables.map((table) => (
+                <div key={table.id} className="overflow-x-auto">
+                  <h3 className="text-xl font-semibold text-[#ffd700] mb-4">{table.name}</h3>
+                  <table className="w-full">
+                    <thead>
+                      <tr className="text-[#ffd700] border-b border-[#ffd700]/20">
+                        <th className="py-3 px-4 text-left">#</th>
+                        <th className="py-3 px-4 text-left">Команда</th>
+                        <th className="py-3 px-4 text-center">И</th>
+                        <th className="py-3 px-4 text-center">В</th>
+                        <th className="py-3 px-4 text-center">Н</th>
+                        <th className="py-3 px-4 text-center">П</th>
+                        <th className="py-3 px-4 text-center">М</th>
+                        <th className="py-3 px-4 text-center">О</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {table.teams.map((team) => (
+                        <tr key={team.position} className="border-b border-[#ffd700]/10 hover:bg-[#2a7a2a]/60 transition-colors">
+                          <td className="py-3 px-4 text-[#ffd700]">{team.position}</td>
+                          <td className="py-3 px-4 text-[#ffd700] font-medium">{team.name}</td>
+                          <td className="py-3 px-4 text-center text-[#ffd700]/80">{team.games}</td>
+                          <td className="py-3 px-4 text-center text-[#ffd700]/80">{team.wins}</td>
+                          <td className="py-3 px-4 text-center text-[#ffd700]/80">{team.draws}</td>
+                          <td className="py-3 px-4 text-center text-[#ffd700]/80">{team.losses}</td>
+                          <td className="py-3 px-4 text-center text-[#ffd700]/80">{team.goalsFor}:{team.goalsAgainst}</td>
+                          <td className="py-3 px-4 text-center text-[#ffd700] font-semibold">{team.points}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-500">Тип турнира</span>
-                    <span className="font-medium text-gray-900">{tournament.type === 'championship' ? 'Чемпионат' : 'Кубок'}</span>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-500">Сезон</span>
-                    <span className="font-medium text-gray-900">{tournament.season}</span>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-500">Количество команд</span>
-                    <span className="font-medium text-gray-900">{tournament.teams}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-        
-        {/* Selected Tournament Table */}
-        {selectedTournament && (
-          <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
-              <TournamentTable 
-                tournamentId={selectedTournament.id} 
-                source={selectedTournament.source} 
-              />
+              ))}
             </div>
-          </section>
-        )}
-      </main>
-      
-      <Footer />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
 
 export default Tournaments;
-
