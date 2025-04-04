@@ -44,8 +44,8 @@ export default defineConfig(({ mode }) => ({
       "@assets": path.resolve(__dirname, "./src/assets"),
     },
   },
-  // For GitHub Pages, use "./" (relative paths)
-  base: './',
+  // For GitHub Pages, use repository name as base
+  base: '/abob/',
   // Добавляем оптимизации для более быстрой разработки
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom'],
