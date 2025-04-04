@@ -10,21 +10,21 @@ const Media = () => {
       type: 'image',
       title: 'Победа над "Нартом"',
       date: '2024-03-15',
-      url: '/images/media/match-victory.jpg'
+      url: '/photo/match-victory.jpg'
     },
     {
       id: 2,
       type: 'video',
       title: 'Интервью с главным тренером',
       date: '2024-03-10',
-      url: '/images/media/coach-interview.jpg'
+      url: '/photo/coach-interview.jpg'
     },
     {
       id: 3,
       type: 'image',
       title: 'Тренировка команды',
       date: '2024-03-05',
-      url: '/images/media/training.jpg'
+      url: '/photo/training.jpg'
     }
   ];
 
