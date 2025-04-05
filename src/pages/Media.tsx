@@ -29,7 +29,7 @@ const Media = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#1a472a] to-[#006400] py-12 relative overflow-hidden">
+    <div className="min-h-screen bg-white py-12 relative overflow-hidden">
       {/* Декоративные элементы */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-10 w-72 h-72 bg-[#ffd700]/5 rounded-full blur-3xl"></div>
@@ -39,9 +39,9 @@ const Media = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Заголовок */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-[#ffd700] mb-4 drop-shadow-lg">Медиа</h1>
-          <div className="w-24 h-1 bg-[#ffd700] mx-auto mb-6"></div>
-          <p className="text-xl text-[#ffd700]/90">
+          <h1 className="text-4xl font-bold text-[#1a472a] mb-4 drop-shadow-lg">Медиа</h1>
+          <div className="w-24 h-1 bg-[#1a472a] mx-auto mb-6"></div>
+          <p className="text-xl text-[#1a472a]/90">
             Фото и видео материалы
           </p>
         </div>
