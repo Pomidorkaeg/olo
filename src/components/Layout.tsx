@@ -22,7 +22,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Навигация */}
-      <nav className="bg-white shadow-lg border-b-2 border-blue-500">
+      <nav className="bg-[#2a7a2a] shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Логотип */}
@@ -47,8 +47,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                     to={link.path}
                     className={`flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 ${
                       location.pathname === link.path
-                        ? 'bg-blue-500 text-white'
-                        : 'text-gray-600 hover:text-blue-500 hover:bg-blue-50'
+                        ? 'bg-[#8b0000] text-[#ffd700]'
+                        : 'text-[#ffd700]/80 hover:text-[#ffd700] hover:bg-[#2a7a2a]/60'
                     }`}
                   >
                     <Icon className="w-4 h-4 mr-2" />
@@ -67,7 +67,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       </main>
 
       {/* Футер */}
-      <footer className="bg-gray-800 py-6">
+      <footer className="bg-[#2a7a2a] py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
