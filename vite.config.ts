@@ -45,7 +45,7 @@ export default defineConfig(({ mode }) => ({
     },
   },
   // For GitHub Pages, use repository name as base
-  base: '/abob/',
+  base: '/',
   // Добавляем оптимизации для более быстрой разработки
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom'],
