@@ -8,7 +8,10 @@ channel = "stable-24_05"
 [deployment]
 run = ["sh", "-c", "npm run preview"]
 build = ["sh", "-c", "npm run build"]
+<<<<<<< HEAD
 
 [[deployment.rewrites]]
 from = "/*"
 to = "/index.html"
+=======
+>>>>>>> 6634c54fef1e3e0ef0ada3010269f08fce4cec81
