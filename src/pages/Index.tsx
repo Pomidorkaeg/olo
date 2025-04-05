@@ -6,7 +6,7 @@ import teamPhoto from '@assets/images/team.jpg';
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-white py-12 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-[#1a472a] via-[#2a7a2a] to-[#1a5f1a] py-12 relative overflow-hidden">
       {/* Декоративные элементы */}
       <div className="absolute inset-0">
         <div className="absolute top-0 left-0 w-full h-full bg-[#ffd700] opacity-[0.02] bg-[radial-gradient(circle,_transparent_20%,_#ffd700_20%,_#ffd700_80%,_transparent_80%,_transparent),radial-gradient(circle,_transparent_20%,_#ffd700_20%,_#ffd700_80%,_transparent_80%,_transparent)_30px_30px] bg-[length:60px_60px]"></div>
