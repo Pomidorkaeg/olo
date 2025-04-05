@@ -80,7 +80,7 @@ const Media = () => {
             {mediaItems.map((item) => (
               <div
                 key={item.id}
-                className="bg-gray-100 rounded-2xl overflow-hidden border border-gray-200 hover:border-emerald-400 transition-all duration-300 group hover:shadow-lg"
+                className="bg-[#1a472a]/40 backdrop-blur-sm rounded-2xl overflow-hidden border border-[#ffd700]/20 hover:border-[#ffd700]/40 transition-all duration-300 group hover:shadow-lg hover:shadow-[#1a472a]/20"
               >
                 {/* Изображение/превью */}
                 <div className="relative aspect-video overflow-hidden">
@@ -112,7 +112,7 @@ const Media = () => {
             {mediaItems.map((item) => (
               <div
                 key={item.id}
-                className="bg-gray-100 rounded-2xl overflow-hidden border border-gray-200 hover:border-emerald-400 transition-all duration-300 group hover:shadow-lg"
+                className="bg-[#1a472a]/40 backdrop-blur-sm rounded-2xl overflow-hidden border border-[#ffd700]/20 hover:border-[#ffd700]/40 transition-all duration-300 group hover:shadow-lg hover:shadow-[#1a472a]/20"
               >
                 <div className="flex">
                   {/* Изображение/превью */}
